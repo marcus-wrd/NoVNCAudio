@@ -12,7 +12,7 @@ start() {
 	ebegin "Starting VNC server"
 	startx
 	/bin/tcpulse /etc/cert.pem 8081 > /dev/null 2>&1
-	source /etc/profile && export UNIXPW_DISABLE_SSL=1 && export UNIXPW_DISABLE_LOCALHOST=1 && cd ~ && export FD_GEOM=1920x1080 && x11vnc -shared -many -nomodtweak -noxkb -afteraccept "/bin/update_allowed"  -rfbport 8080 -unixpw_cmd /bin/verify_pw -loop -display ":1" -ssl /etc/cert.pem -repeat -clear_all -skip_lockkeys > /dev/null 2>&1
+	source /etc/profile && export UNIXPW_DISABLE_SSL=1 && export UNIXPW_DISABLE_LOCALHOST=1 && cd ~ && export FD_GEOM=1536x864 && x11vnc -shared -many -nomodtweak -noxkb -afteraccept "/bin/update_allowed"  -rfbport 8080 -unixpw_cmd /bin/verify_pw -loop -display ":1" -ssl /etc/cert.pem -repeat -clear_all -skip_lockkeys > /dev/null 2>&1
 	eend $?
 }
 
