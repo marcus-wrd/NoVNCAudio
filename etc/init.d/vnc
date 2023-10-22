@@ -11,8 +11,8 @@ depend() {
 start() {
 	ebegin "Starting VNC server"
 	startx
-	/bin/tcpulse /etc/cert.pem 5702
-	source /etc/profile && export UNIXPW_DISABLE_SSL=1 && export UNIXPW_DISABLE_LOCALHOST=1 && cd ~ && export FD_GEOM=1920x1080 && x11vnc -shared -many -nomodtweak -noxkb -afteraccept "/bin/update_allowed"  -rfbport 5802 -unixpw_cmd /bin/verify_pw -loop -display ":1" -ssl /etc/cert.pem -repeat -clear_all -skip_lockkeys
+	/bin/tcpulse /etc/cert.pem 5701
+	source /etc/profile && export UNIXPW_DISABLE_SSL=1 && export UNIXPW_DISABLE_LOCALHOST=1 && cd ~ && export FD_GEOM=1920x1080 && x11vnc -shared -many -nomodtweak -noxkb -afteraccept "/bin/update_allowed"  -rfbport 5801 -unixpw_cmd /bin/verify_pw -loop -display ":1" -ssl /etc/cert.pem -repeat -clear_all -skip_lockkeys
 	eend $?
 }
 
