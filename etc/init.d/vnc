@@ -1,7 +1,6 @@
 #!/sbin/openrc-run
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License, v2 or later
-DISPLAYS="1000:2"
 
 depend() {
 	need net
@@ -11,15 +10,9 @@ depend() {
 
 start() {
 	ebegin "Starting VNC server"
-
-	for user in "$DISPLAYS"; do
-		usrid=${user%%:*}
-                usrname=$( id -u -n $usrid )
-		usrdisp=${user##*:}
-                su -s "/bin/bash" $usrname -c "startx -- :$usrdisp" > /var/log/x11.$usrname.log 2>&1 &
-                su -s "/bin/bash" $usrname -c "/bin/tcpulse /etc/cert.pem 570${usrdisp}" > /var/log/tcpulse.$usrname.log 2>&1 &
-		su -s /bin/bash ${usrname} -c "source /etc/profile && export UNIXPW_DISABLE_SSL=1 && export UNIXPW_DISABLE_LOCALHOST=1 && cd ~$usrname && export FD_GEOM=1920x1080 && x11vnc -shared -many -nomodtweak -noxkb -afteraccept \"/bin/update_allowed\"  -rfbport 580${usrdisp} -unixpw_cmd /bin/verify_pw -loop -display \":$usrdisp\" -ssl /etc/cert.pem -repeat -clear_all -skip_lockkeys " >/var/log/vncserver.${usrdisp}.log 2>&1 &
-	done
+	startx
+	/bin/tcpulse /etc/cert.pem 5702
+	source /etc/profile && export UNIXPW_DISABLE_SSL=1 && export UNIXPW_DISABLE_LOCALHOST=1 && cd ~ && export FD_GEOM=1920x1080 && x11vnc -shared -many -nomodtweak -noxkb -afteraccept "/bin/update_allowed"  -rfbport 5802 -unixpw_cmd /bin/verify_pw -loop -display ":1" -ssl /etc/cert.pem -repeat -clear_all -skip_lockkeys
 	eend $?
 }
 
@@ -27,13 +20,7 @@ stop() {
 	ebegin "Stopping VNC server"
         pkill -U 1000
 
-	for user in $DISPLAYS; do
-                usrid=${user%%:*}
-                usrdisp=${user##*:}
-                pkill -U $usrid
-                rm -rf /tmp/.X$usrdisp-lock 2>/dev/null
- 	done
-
+	rm -rf /tmp/.X1-lock 2>/dev/null
         rm -rf /tmp/.X11-unix >/dev/null 2>&1
 
  	eend 0
