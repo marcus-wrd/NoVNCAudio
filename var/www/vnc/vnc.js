@@ -5,9 +5,9 @@ import WebAudio from './webaudio.js';
 export default class VNC {
     constructor() {
         this.password = this.readQueryVariable('password');
-        this.protocol = (window.location.protocol === 'https:' ? 'wss' : 'ws');
-        this.url = this.protocol + '://'+ window.location.host +'/websockify?token=1axi3';
-        this.audio = new WebAudio(this.protocol + '://' + window.location.host+'/websockify?token=2byj4');
+        this.protocol = ("wss");
+        this.url = this.protocol + '://'+ window.location.host +':443/websockify?token=1axi3';
+        this.audio = new WebAudio(this.protocol + '://' + window.location.host+':443/websockify?token=2byj4');
     }
 
 
