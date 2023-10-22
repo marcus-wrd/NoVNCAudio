@@ -78,7 +78,8 @@
          
          let vnc = new VNC();
          vnc.start();
-         
+         vnc.setQuality(0);
+         vnc.setCompression(9);
          document.getElementById('quality').onchange = x =>  vnc.setQuality(x.srcElement.value);
          document.getElementById('compression').onchange = x =>  vnc.setCompression(x.srcElement.value);
          document.getElementById('paste').onclick = x => vnc.paste(document.getElementById('cboard').value);
@@ -93,11 +94,11 @@
          <a href="#" class="myButton" id="fullscreen">fullscreen</a><input type="text" id="cboard" name="cboard" size="10" /><a href="#" class="myButton" id="paste">paste</a>
          <li>
             <label for="quality">Quality:</label>
-            <input id="quality" type="range" min="0" max="9" value="9">
+            <input id="quality" type="range" min="0" max="9" value="0">
          </li>
          <li>
             <label for="compression">Compression level:</label>
-            <input id="compression" type="range" min="0" max="9" value="4">
+            <input id="compression" type="range" min="0" max="9" value="9">
          </li>
       </ul>
       <div id="screen"></div>
