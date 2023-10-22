@@ -6,8 +6,8 @@ export default class VNC {
     constructor() {
         this.password = this.readQueryVariable('password');
         this.protocol = (window.location.protocol === 'https:' ? 'wss' : 'ws');
-        this.url = this.protocol + '://'+ window.location.host +'/websockify?token=1';
-        this.audio = new WebAudio(this.protocol + '://' + window.location.host+'/websockify?token=2');
+        this.url = this.protocol + '://'+ window.location.host +'/websockify?token=1axi3';
+        this.audio = new WebAudio(this.protocol + '://' + window.location.host+'/websockify?token=2byj4');
     }
 
 
