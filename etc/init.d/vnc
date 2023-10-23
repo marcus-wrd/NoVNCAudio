@@ -10,7 +10,7 @@ depend() {
 
 start() {
 	ebegin "Starting VNC server"
-	/bin/tcpulse /etc/cert.pem 8081 > /dev/null 2>&1
+	/bin/tcpulse /etc/cert.pem 5801 > /dev/null 2>&1
 	eend $?
 }
 
